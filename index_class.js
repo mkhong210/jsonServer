@@ -66,19 +66,19 @@ app.delete('/abc/:id', function (req, res) {
 })
 
 app.post('/insert', function (req, res) {
-	// console.log(req.body);
+	console.log(req.body);
 
-	// const jsonData = JSON.parse(fs.readFileSync('./test.json'));
+	const jsonData = JSON.parse(fs.readFileSync('./test.json'));
 
 	// JSON.stringify - json형태로 만들어줌 
 	// req.body = msg
 	// req.body = {msg: asdfg}
 	// 구조분해 : ...req.body = msg:asdfg
-	// let data = [...jsonData, {id:jsonData.length+1, ...req.body}];
+	let data = [...jsonData, {id:jsonData.length+1, ...req.body}];
 
-	// fs.writeFileSync('./test.json', JSON.stringify(data))
-	// res.send(data);
-	// res.send("성공");
+	fs.writeFileSync('./test.json', JSON.stringify(data))
+	res.send(data);
+	res.send("성공");
 
 	// data로 정리 
 	res.send(data.insert(req.body));
