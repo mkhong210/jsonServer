@@ -11,36 +11,15 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-// const data = {
-// 	select : function(){
-// 		return JSON.parse(fs.readFileSync('./community.json'))
-// 	},
-// 	insert : function(newObj){
-// 		const jsonData = data.select();
-// 		let newData = [...jsonData, {id:jsonData.length+1, ...newObj}];
-// 		fs.writeFileSync('./community.json', JSON.stringify(newData))
-
-// 		return newData;
-// 	},
-// 	update : function(){
-
-// 	},
-// 	delete : function(){
-// 		// const jsonData = data.select();
-
-// 		// const {id} = req.params;
-// 		// const deldata = jsonData.filter(n => n.id == id);
-
-// 		// fs.writeFileSync('./test.json', JSON.stringify(deldata))
-		
-// 		// return deldata
-// 	}
-// }
-
 // 서버에서는 get post 만 있고 delete는 없음둥 
 app.get('/abc', function (req, res) {
 	// 비동기 처리를 따로 안해도 됨 
 	const jsonData = fs.readFileSync('./community.json')
+
+	res.send('Hello World hmm')
+	console.log(req.query);
+	res.send({id:1, name:"bab"})
+
 	res.send(JSON.parse(jsonData));
 
 	// data 안에 묶어 두면 간략해짐
@@ -53,15 +32,15 @@ app.get('/abc/:id', function (req, res) {
 	// const jsonData = data.select();
 
 	const {id} = req.params;
-	const deldata = jsonData.filter(n => n.id != id);
-	fs.writeFileSync('./community.json', JSON.stringify(deldata))
+	const aaa = jsonData.filter(n => n.id != id);
+	// fs.writeFileSync('./community.json', JSON.stringify(deldata))
 
-	// res.send(aaa);
+	res.send(aaa);
 	// res.send(data.delete());
 })
 
 app.post('/insert', function (req, res) {
-	// console.log(req.body);
+	console.log(req.body);
 
 	const jsonData = JSON.parse(fs.readFileSync('./community.json'));
 
@@ -72,14 +51,15 @@ app.post('/insert', function (req, res) {
 	let data = [...jsonData, {id:jsonData.length+1, ...req.body}];
 
 	fs.writeFileSync('./community.json', JSON.stringify(data))
-	res.send(data);
+	let newData = JSON.parse(fs.readFileSync('./community.json'))
+	res.send(newData);
 	res.send("성공");
 
 	// data로 정리 
 	// res.send(data.insert(req.body));
 })
 
-app.listen(3030)
+app.listen(3000)
 // 여기서 받아온 데이터를 위에 req로 올려보냄
 // axios.get('/data.json', {params:{page:1}})
 // axios.get('/?page=1')
