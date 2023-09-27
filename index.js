@@ -26,7 +26,7 @@ app.get('/commu_list/:id', function (req, res) {
 
 app.post('/insert', function (req, res) { 
 	let jsonD = JSON.parse(fs.readFileSync('./community.json'))
-	fs.writeFileSync('./community.json',JSON.stringify([...jsonD,{...req.body}]))
+	fs.writeFileSync('./community.json',JSON.stringify([...jsonD,{id:jsonData.length+1, ...newObj}]))
 	let newjson = JSON.parse(fs.readFileSync('./community.json'))
 	res.send(newjson);
 })
