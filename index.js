@@ -84,7 +84,7 @@ app.post('/insert', function (req, res) {
 	res.send(data.insert(req.body));
 })
 
-app.listen(3000)
+app.listen(3030)
 // 여기서 받아온 데이터를 위에 req로 올려보냄
 // axios.get('/data.json', {params:{page:1}})
 // axios.get('/?page=1')
